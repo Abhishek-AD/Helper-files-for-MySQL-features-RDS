@@ -1,0 +1,3 @@
+resource.type="cloudsql_database"
+resource.labels.database_id="perfect-lantern-278104:auditdb"
+logName=("projects/perfect-lantern-278104/logs/cloudaudit.googleapis.com%2Factivity" OR "projects/perfect-lantern-278104/logs/cloudaudit.googleapis.com%2Fdata_access" OR "projects/perfect-lantern-278104/logs/cloudaudit.googleapis.com%2Fsystem_event")
