@@ -1,11 +1,12 @@
 #!/bin/bash
 
-sysbench --db-driver=mysql --mysql-host=host-name --mysql-port=3306 --mysql-user=admin --mysql-password=password --mysql-db=foo --range_size=100  --table_size=1000000 --tables=1 --threads=1 --events=0 --time=60 --rand-type=uniform ./src/lua/oltp_update_non_index.lua  prepare
+sysbench --db-driver=mysql --mysql-host=host --mysql-port=3306 --mysql-user=admin --mysql-password=password--mysql-db=sysbench --range_size=100  --table_size=1000000 --tables=1 --threads=1 --events=0 --time=650 --rand-type=uniform ./src/lua/oltp_read_write.lua  prepare
 
-for i in 1 2 4 8 16 32 64 128 256 512
+for i in 2 4 16 64
 do
   echo running test for $i threads
-  sysbench --db-driver=mysql --mysql-host=host-name --mysql-port=3306 --mysql-user=admin --mysql-password=password --mysql-db=foo  --table_size=1000000 --tables=1 --threads=$i --time=60 --rand-type=uniform ./src/lua/oltp_update_non_index.lua  run > file_$i.txt
-  echo "cooling down for half a minute."
-  sleep 30
+  sysbench --db-driver=mysql --mysql-host=host --mysql-port=3306 --mysql-user=admin --mysql-password=password --mysql-db=sysbench  --table_size=1000000 --tables=1 --threads= --time=650 --rand-type=uniform ./src/lua/oltp_read_write.lua  run > aws_$i.txt
+  echo "cooling down"
+  sleep 10
+  
 done
